@@ -1,5 +1,3 @@
-from gc import disable
-from operator import ne
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -38,22 +36,17 @@ while True:
     for name in current_names:
         if name not in collected_names:
             collected_names.append(name)
-    
-    print(f"현재까지 {len(collected_names)}개의 이름 수집 완료")
 
     try:
         list_buttons = driver.find_elements(By.CSS_SELECTOR, "div.zRM9F a[target='_self']")
         
         if not list_buttons:
-            print("더보기 버튼을 찾을 수 없음.")
-            break
+            raise Exception("No list buttons found.")
         
         next_list_button = list_buttons[-1]
         disabled = next_list_button.get_attribute("aria-disabled")
-        print("disabled:", disabled)
         
         if disabled == "true":
-            print("마지막 페이지입니다.")
             break
         else:
             next_list_button.click()
