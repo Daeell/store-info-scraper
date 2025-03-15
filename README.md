@@ -1,2 +1,2 @@
 # store-info-scraper
-data scraping code from never map
+simple data scraping code from naver map
