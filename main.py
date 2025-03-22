@@ -1,4 +1,5 @@
 import time
+from urllib.parse import quote
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
@@ -10,7 +11,11 @@ options.add_argument('window-size=1380,900')
 driver = webdriver.Chrome(options=options)
 
 driver.implicitly_wait(time_to_wait=3)
-URL = "https://map.naver.com/p/search/%EC%9D%B4%EB%B0%B1%EC%9E%A5%EB%8F%88%EA%B9%8C%EC%8A%A4"
+
+search_term = "한신포차"
+encoded_term = quote(search_term)
+URL = f"https://map.naver.com/v5/search/{encoded_term}"
+
 driver.get(URL)
 
 switch_left(driver)
